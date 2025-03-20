@@ -1,7 +1,6 @@
-package miau.auau.amigosdequatropatas.Entidades;
+package miau.auau.amigosdequatropatas.entidades;
 
 import java.io.RandomAccessFile;
-import java.util.Random;
 
 public class Animal {
     private int cod;
