@@ -12,6 +12,7 @@ import java.util.List;
 @RequestMapping(value = "apis/medicamento")
 public class MedicamentoCtrl
 {
+
     @GetMapping(value = "busca_usuario")
     public ResponseEntity<Object> getUsuario()
     {
