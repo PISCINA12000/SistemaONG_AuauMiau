@@ -16,7 +16,6 @@ public class Animal {
     private String especie;
 
     // Construtores
-
     public Animal(int cod, String nome, char sexo, String raca, int idade, double peso, boolean castrado, RandomAccessFile foto, boolean adotado, String especie) {
         this.cod = cod;
         this.nome = nome;
