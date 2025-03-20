@@ -5,7 +5,6 @@ public class TipoMedicamento {
     private String nome;
 
     // Construtores
-
     public TipoMedicamento(int cod, String nome) {
         this.cod = cod;
         this.nome = nome;
