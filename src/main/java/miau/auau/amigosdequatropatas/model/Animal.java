@@ -1,7 +1,8 @@
-package miau.auau.amigosdequatropatas.Entidades;
+package miau.auau.amigosdequatropatas.model;
 
 import java.io.RandomAccessFile;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Animal {
     private int cod;
@@ -16,7 +17,6 @@ public class Animal {
     private String especie;
 
     // Construtores
-
     public Animal(int cod, String nome, char sexo, String raca, int idade, double peso, boolean castrado, RandomAccessFile foto, boolean adotado, String especie) {
         this.cod = cod;
         this.nome = nome;
@@ -112,5 +112,13 @@ public class Animal {
 
     public void setEspecie(String especie) {
         this.especie = especie;
+    }
+
+    // Métodos
+    public List<Animal> getAnimal() {
+        List<Animal> lista = new ArrayList<>();
+        // retorna todos os animais chamando o banco de dados
+        //lista = objetoBanco.getAnimal;
+        return lista;
     }
 }

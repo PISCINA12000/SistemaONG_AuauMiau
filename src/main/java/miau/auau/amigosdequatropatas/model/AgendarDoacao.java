@@ -1,4 +1,4 @@
-package miau.auau.amigosdequatropatas.Entidades;
+package miau.auau.amigosdequatropatas.model;
 
 public class AgendarDoacao {
     private int cod;
