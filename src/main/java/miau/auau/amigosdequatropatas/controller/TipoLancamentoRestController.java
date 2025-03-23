@@ -1,5 +1,6 @@
 package miau.auau.amigosdequatropatas.controller;
 
+import miau.auau.amigosdequatropatas.model.TipoMedicamento;
 import miau.auau.amigosdequatropatas.util.Erro;
 import miau.auau.amigosdequatropatas.model.TipoLancamento;
 import miau.auau.amigosdequatropatas.repository.TipoLancamentoRepository;
@@ -22,20 +23,34 @@ public class TipoLancamentoRestController {
     @GetMapping("buscar")
     public ResponseEntity<Object> getTpLanc() {
         List<TipoLancamento> lista = new ArrayList<>();
+        lista.addAll(tipoLancamentoRepository.findAll());
         // busca todos os tipos de lancamento e atribui para 'lista'
-        if(lista.size() > 0){
-            return ResponseEntity.ok(lista);
+        if(lista.size() > 0)
+        {
+            return ResponseEntity.ok(lista); // vetor de string
         }
-        return ResponseEntity.badRequest().body(new Erro("Nenhum Tipo de Lançamento cadastrado!"));
+        else
+            return ResponseEntity.badRequest().body(new Erro("Nenhum Tipo de Lançamento cadastrado!"));
     }
-    @GetMapping("buscar-nome")
-    public ResponseEntity<Object> getTpLanc(String tipoLanc) {
-        TipoLancamento tipoLancamento = new TipoLancamento();
-        // busca o Tipo de Lançamento que corresponde com tipoLanc e retorna para 'tipoLancamento'
-        if(tipoLancamento != null){
-            return ResponseEntity.ok(tipoLancamento);
+    @GetMapping("buscar-nome/{nome}")
+    public ResponseEntity<Object> getTpLanc(@PathVariable (value = "nome") String tipoLanc) {
+        List<TipoLancamento> lista = new ArrayList<>();
+        lista.addAll(tipoLancamentoRepository.findAll());
+        if(lista.size() > 0)
+        {
+            int i = 0;
+            while(i < lista.size() && !lista.get(i).getDescricao().toLowerCase().equals(tipoLanc)) //
+                i++;
+            if (i < lista.size()) // não terminou
+            {
+                List<TipoLancamento> lista2 = new ArrayList<>();
+                lista2.add(lista.get(i));
+                return ResponseEntity.ok(lista2);
+            }
+            return ResponseEntity.badRequest().body(new Erro("Esse Tipo de Lançamento não foi encontrado!"));
         }
-        return ResponseEntity.badRequest().body(new Erro("Esse Tipo de Lançamento não foi encontrado!"));
+        else
+            return ResponseEntity.badRequest().body(new Erro("Nenhum Tipo de Lançamento cadastrado!"));
     }
 
     // GRAVAR

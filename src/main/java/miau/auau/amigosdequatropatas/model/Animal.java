@@ -20,10 +20,11 @@ public class Animal {
     private double peso;
     private boolean castrado;
     private boolean adotado;
-    private String especie;
+
+
     // tratar foto depois
     // Construtores
-    public Animal(int cod, String nome, char sexo, String raca, int idade, double peso, boolean castrado,  boolean adotado, String especie) {
+    public Animal(int cod, String nome, char sexo, String raca, int idade, double peso, boolean castrado,  boolean adotado) {
         this.cod = cod;
         this.nome = nome;
         this.sexo = sexo;
@@ -32,10 +33,10 @@ public class Animal {
         this.peso = peso;
         this.castrado = castrado;
         this.adotado = adotado;
-        this.especie = especie;
+
     }
     public Animal(){
-        this(0,"",' ',"",0,0,false,false,"");
+        this(0,"",' ',"",0,0,false,false);
     }
 
     // Gets e Sets
@@ -101,14 +102,6 @@ public class Animal {
 
     public void setAdotado(boolean adotado) {
         this.adotado = adotado;
-    }
-
-    public String getEspecie() {
-        return especie;
-    }
-
-    public void setEspecie(String especie) {
-        this.especie = especie;
     }
 
     // Métodos

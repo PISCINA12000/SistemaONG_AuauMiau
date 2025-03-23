@@ -1,5 +1,6 @@
 package miau.auau.amigosdequatropatas.controller;
 
+import miau.auau.amigosdequatropatas.model.TipoMedicamento;
 import miau.auau.amigosdequatropatas.repository.UsuarioRepository;
 import miau.auau.amigosdequatropatas.util.Erro;
 import miau.auau.amigosdequatropatas.model.Usuario;
@@ -19,18 +20,32 @@ public class UsuarioRestController
     @GetMapping("buscar")
     public ResponseEntity<Object> getUsuarios() {
         List<Usuario>lista = new ArrayList<>();
+        lista.addAll(usuarioRepository.findAll());
         if(lista.size() > 0){
-            return ResponseEntity.ok(lista);
+            return ResponseEntity.ok(lista); // vetor de strings
         }
-        return ResponseEntity.badRequest().body(new Erro("Não há nenhum Usuario cadastrado!"));
+        else
+            return ResponseEntity.badRequest().body(new Erro("Não há nenhum Usuario cadastrado!"));
     }
-    @GetMapping("buscar-nome")
-    public ResponseEntity<Object> getUsuarios(String nomeUsuario) {
-        List<Usuario>lista = new ArrayList<>();
-        if(lista.size() > 0){
-            return ResponseEntity.ok(lista);
+    @GetMapping("buscar-nome/{cpf}")
+    public ResponseEntity<Object> getUsuarios(@PathVariable (value = "cpf") String cpf) {
+        List<Usuario> lista = new ArrayList<>();
+        lista.addAll(usuarioRepository.findAll());
+        if(lista.size() > 0)
+        {
+            int i = 0;
+            while(i < lista.size() && !lista.get(i).getNome().equals(cpf)) //
+                i++;
+            if (i < lista.size()) // não terminou
+            {
+                List<Usuario> lista2 = new ArrayList<>();
+                lista2.add(lista.get(i));
+                return ResponseEntity.ok(lista2);
+            }
+            return ResponseEntity.badRequest().body(new Erro("Usuário não foi encontrado!"));
         }
-        return ResponseEntity.badRequest().body(new Erro("Nenhum Usuario foi encontrado!"));
+        else
+            return ResponseEntity.badRequest().body(new Erro("Nenhum usuário cadastrado!"));
     }
 
     @PostMapping("gravar")

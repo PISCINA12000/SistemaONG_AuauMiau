@@ -24,21 +24,33 @@ public class TipoMedicamentosRestController {
     @GetMapping("buscar")
     public ResponseEntity<Object> getTpMedic() {
         List<TipoMedicamento> lista = new ArrayList<>();
-
+        lista.addAll(tipoMedicamentosRepository.findAll());
         if(lista.size() > 0){
             return ResponseEntity.ok(lista);
         }
-        return ResponseEntity.badRequest().body(new Erro("Nenhum Tipo de Medicamento cadastrado!"));
+        else
+            return ResponseEntity.badRequest().body(new Erro("Nenhum Tipo de Medicamento cadastrado!"));
     }
 
-    @GetMapping("buscar/{tipoMedic}")
-    public ResponseEntity<Object> getTpMeidic(String tipoMedic) {
-        TipoMedicamento tipoMedicamento = new TipoMedicamento();
-
-        if(tipoMedicamento != null){
-            return ResponseEntity.ok(tipoMedicamento);
+    @GetMapping("buscar-nome/{nome}")
+    public ResponseEntity<Object> getTpMeidic(@PathVariable (value = "nome") String tipoMedic) {
+        List<TipoMedicamento> lista = new ArrayList<>();
+        lista.addAll(tipoMedicamentosRepository.findAll());
+        if(lista.size() > 0)
+        {
+            int i = 0;
+            while(i < lista.size() && !lista.get(i).getNome().toLowerCase().equals(tipoMedic)) //
+                i++;
+            if (i < lista.size()) // não terminou
+            {
+                List<TipoMedicamento> lista2 = new ArrayList<>();
+                lista2.add(lista.get(i));
+                return ResponseEntity.ok(lista2);
+            }
+            return ResponseEntity.badRequest().body(new Erro("Esse Tipo de Medicamento não foi encontrado!"));
         }
-        return ResponseEntity.badRequest().body(new Erro("Esse Tipo de Medicamento não foi encontrado!"));
+        else
+            return ResponseEntity.badRequest().body(new Erro("Nenhum Tipo de Medicamento cadastrado!"));
     }
 
     // GRAVAR

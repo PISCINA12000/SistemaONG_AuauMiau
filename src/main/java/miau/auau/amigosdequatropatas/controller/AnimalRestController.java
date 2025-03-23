@@ -1,6 +1,7 @@
 package miau.auau.amigosdequatropatas.controller;
 
 import miau.auau.amigosdequatropatas.model.Animal;
+import miau.auau.amigosdequatropatas.model.TipoMedicamento;
 import miau.auau.amigosdequatropatas.util.Erro;
 import miau.auau.amigosdequatropatas.repository.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +31,25 @@ public class AnimalRestController {
         }
         return ResponseEntity.badRequest().body(new Erro("Não há nenhum animal cadastrado!"));
     }
-    @GetMapping("buscar-nome")
-    public ResponseEntity<Object> getAnimais(String nomeAnimal) {
-        List<Animal>lista = new ArrayList<>();
-        // busca os animais com o respectivo 'nomeAnimal' e retorna para o objeto
-        if(lista.size() > 0){
-            return ResponseEntity.ok(lista);
+    @GetMapping("buscar-nome/{nome}")
+    public ResponseEntity<Object> getAnimais(@PathVariable(value = "nome") String nomeAnimal) {
+        List<Animal> lista = new ArrayList<>();
+        lista.addAll(animalRepository.findAll());
+        if(lista.size() > 0)
+        {
+            int i = 0;
+            while(i < lista.size() && !lista.get(i).getNome().toLowerCase().equals(nomeAnimal)) //
+                i++;
+            if (i < lista.size()) // não terminou
+            {
+                List<Animal> lista2 = new ArrayList<>();
+                lista2.add(lista.get(i));
+                return ResponseEntity.ok(lista2);
+            }
+            return ResponseEntity.badRequest().body(new Erro("Esse animal não foi encontrado!"));
         }
-        return ResponseEntity.badRequest().body(new Erro("Nenhum animal foi encontrado!"));
+        else
+            return ResponseEntity.badRequest().body(new Erro("Nenhum animal cadastrado!"));
     }
 
     // GRAVAR
