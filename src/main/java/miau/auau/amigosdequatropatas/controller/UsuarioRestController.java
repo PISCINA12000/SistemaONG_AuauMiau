@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("apis/usuario")
 public class UsuarioRestController
@@ -27,14 +28,14 @@ public class UsuarioRestController
         else
             return ResponseEntity.badRequest().body(new Erro("Não há nenhum Usuario cadastrado!"));
     }
-    @GetMapping("buscar-nome/{cpf}")
+    @GetMapping("buscar-cpf/{cpf}")
     public ResponseEntity<Object> getUsuarios(@PathVariable (value = "cpf") String cpf) {
         List<Usuario> lista = new ArrayList<>();
         lista.addAll(usuarioRepository.findAll());
         if(lista.size() > 0)
         {
             int i = 0;
-            while(i < lista.size() && !lista.get(i).getNome().equals(cpf)) //
+            while(i < lista.size() && !lista.get(i).getCpf().equals(cpf)) //
                 i++;
             if (i < lista.size()) // não terminou
             {

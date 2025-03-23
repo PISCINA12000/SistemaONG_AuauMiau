@@ -21,7 +21,6 @@ public class Animal {
     private boolean castrado;
     private boolean adotado;
 
-
     // tratar foto depois
     // Construtores
     public Animal(int cod, String nome, char sexo, String raca, int idade, double peso, boolean castrado,  boolean adotado) {
