@@ -1,4 +1,7 @@
-package miau.auau.amigosdequatropatas.Entidades;
+package miau.auau.amigosdequatropatas.entidades;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Usuario {
     private int cod;
@@ -98,5 +101,10 @@ public class Usuario {
 
     public void setSexo(char sexo) {
         this.sexo = sexo;
+    }
+
+    public List<Usuario> getUsuario() {
+        List<Usuario> lista = new ArrayList<>();
+        return lista;
     }
 }

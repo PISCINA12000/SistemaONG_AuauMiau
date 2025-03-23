@@ -1,7 +1,7 @@
 package miau.auau.amigosdequatropatas.restcontrollers;
 
-import miau.auau.amigosdequatropatas.Entidades.Erro;
-import miau.auau.amigosdequatropatas.Entidades.Usuario;
+import miau.auau.amigosdequatropatas.entidades.Erro;
+import miau.auau.amigosdequatropatas.entidades.Usuario;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

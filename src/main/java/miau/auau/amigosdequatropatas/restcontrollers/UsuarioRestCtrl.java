@@ -1,57 +1,47 @@
 package miau.auau.amigosdequatropatas.restcontrollers;
 
-import miau.auau.amigosdequatropatas.Entidades.Erro;
-import miau.auau.amigosdequatropatas.Entidades.Usuario;
+import miau.auau.amigosdequatropatas.entidades.Erro;
+import miau.auau.amigosdequatropatas.entidades.Usuario;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "apis/usuario")
+@RequestMapping("apis/usuario")
 public class UsuarioRestCtrl
 {
-    @GetMapping(value = "busca_usuario")
-    public ResponseEntity<Object> getUsuario()
-    {
-        List<Usuario> usuarioList=new ArrayList<>();
-        Biblioteca biblioteca = new Biblioteca();
-        usuarioList=biblioteca.getByAuthor(autor);
-        if(usuarioList.size()>0)
-            return ResponseEntity.ok(usuarioList);
-        else
-            return ResponseEntity.badRequest().body(new Erro("Não existe nenhum usuario cadastrado."));
+    @GetMapping("buscar")
+    public ResponseEntity<Object> getUsuarios() {
+        List<Usuario>lista = new ArrayList<>();
+        if(lista.size() > 0){
+            return ResponseEntity.ok(lista);
+        }
+        return ResponseEntity.badRequest().body(new Erro("Não há nenhum Usuario cadastrado!"));
+    }
+    @GetMapping("buscar")
+    public ResponseEntity<Object> getUsuarios(String nomeUsuario) {
+        List<Usuario>lista = new ArrayList<>();
+        if(lista.size() > 0){
+            return ResponseEntity.ok(lista);
+        }
+        return ResponseEntity.badRequest().body(new Erro("Nenhum Usuario foi encontrado!"));
     }
 
-    @GetMapping(value = "busca_usuario2")
-    public ResponseEntity<Object> getUsuario(String usuario)
-    {
-        Usuario usuario=new Usuario();
-        if(usuario!=null)
-            return ResponseEntity.ok(usuario);
-        else
-            return ResponseEntity.badRequest().body(new Erro("Não existe nenhum usuario cadastrado."));
-    }
-
-    @PostMapping(value = "ad_usuario")
-    public ResponseEntity<Object> gravarUsuario(@RequestBody Usuario usuario)
-    {
-        biblioteca.adicionarLivro(usuario);
+    @PostMapping("gravar")
+    public ResponseEntity<Object> gravarUsuario(@RequestBody Usuario usuario) {
         return ResponseEntity.ok(usuario);
     }
 
-    @DeleteMapping(value = "excluir_usuario")
-    public ResponseEntity<Object> excluirUsuario(int id)
-    {
-        String nome = "";
-
-        return ResponseEntity.ok("O usuario"+ nome +" foi excluido com sucesso!");
+    // DELETE
+    @DeleteMapping("excluir")
+    public ResponseEntity<Object> excluirUsuario(int id) {
+        String nomeUsuario = "";
+        return ResponseEntity.ok("O usuario " + nomeUsuario + " foi excluído com sucesso!");
     }
 
-    @PutMapping(value = "atualizar_usuario")
-    public ResponseEntity<Object> atualizarUsuario(@RequestBody Usuario usuario)
-    {
-
+    @PutMapping("atualizar")
+    public ResponseEntity<Object> atualizarUsuario(@RequestBody Usuario usuario) {
+        return ResponseEntity.ok("O usuario foi atualizado com sucesso!");
     }
 }

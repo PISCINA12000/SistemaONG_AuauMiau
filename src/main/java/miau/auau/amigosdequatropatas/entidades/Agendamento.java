@@ -1,4 +1,4 @@
-package miau.auau.amigosdequatropatas.Entidades;
+package miau.auau.amigosdequatropatas.entidades;
 
 public class Agendamento {
     private int codMedi; //codigo do medicamento
