@@ -1,4 +1,4 @@
-package miau.auau.amigosdequatropatas.model;
+package miau.auau.amigosdequatropatas.util;
 
 public class Erro {
     private String mensagem;

@@ -1,7 +1,8 @@
 package miau.auau.amigosdequatropatas.controller;
 
 import miau.auau.amigosdequatropatas.model.Animal;
-import miau.auau.amigosdequatropatas.model.Erro;
+import miau.auau.amigosdequatropatas.util.Erro;
+import miau.auau.amigosdequatropatas.repository.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,24 +12,25 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("apis/animal")
-public class AnimaisRestCtrl {
+public class AnimalRestController {
     // DECLARAÇÕES
     @Autowired
-    private Animal animal;
+    private AnimalRepository animalRepository;
+
 
     // MÉTODOS ---------------------------------------------
     // BUSCAR
     @GetMapping("buscar")
     public ResponseEntity<Object> getAnimais() {
         List<Animal>lista = new ArrayList<>();
-        lista = animal.getAnimal();
+        lista = animalRepository.findAll();
         // busca todos os animais e atribui para 'lista'
         if(lista.size() > 0){
             return ResponseEntity.ok(lista);
         }
         return ResponseEntity.badRequest().body(new Erro("Não há nenhum animal cadastrado!"));
     }
-    @GetMapping("buscar")
+    @GetMapping("buscar-nome")
     public ResponseEntity<Object> getAnimais(String nomeAnimal) {
         List<Animal>lista = new ArrayList<>();
         // busca os animais com o respectivo 'nomeAnimal' e retorna para o objeto
@@ -42,7 +44,9 @@ public class AnimaisRestCtrl {
     @PostMapping("gravar")
     public ResponseEntity<Object> gravarAnimal(@RequestBody Animal animal) {
         // grava no banco de dados o respectivo objeto 'animal'
-        return ResponseEntity.ok(animal); // depois da gravação bem sucedida
+
+        return ResponseEntity.ok(animalRepository.save(animal));
+
     }
 
     // DELETE

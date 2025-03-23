@@ -1,30 +1,34 @@
 package miau.auau.amigosdequatropatas.model;
 
+import jakarta.persistence.*;
+import miau.auau.amigosdequatropatas.modelReserva.Endereco;
+
+@Entity
+@Table(name = "Usuario")
 public class Usuario {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cod;
     private String nome;
     private String email;
     private String senha;
     private String telefone;
     private String cpf;
-    private Endereco endereco;
     private String privilegio;
     private char sexo;
-
     // Construtores
-    public Usuario(int cod, String nome, String email, String senha, String telefone, String cpf, Endereco endereco, String privilegio, char sexo) {
+    public Usuario(int cod, String nome, String email, String senha, String telefone, String cpf, String privilegio, char sexo) {
         this.cod = cod;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.telefone = telefone;
         this.cpf = cpf;
-        this.endereco = endereco;
         this.privilegio = privilegio;
         this.sexo = sexo;
     }
     public Usuario() {
-        this(0, "", "", "", "", "", null, "", ' ');
+        this(0, "", "", "", "", "", "", ' ');
     }
 
     // Gets e Sets
@@ -74,14 +78,6 @@ public class Usuario {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
     }
 
     public String getPrivilegio() {

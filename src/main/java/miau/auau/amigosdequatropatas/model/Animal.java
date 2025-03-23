@@ -1,10 +1,17 @@
 package miau.auau.amigosdequatropatas.model;
 
+import jakarta.persistence.*;
+
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Entity
+@Table(name = "Animal")
 public class Animal {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int cod;
     private String nome;
     private char sexo;
@@ -12,12 +19,11 @@ public class Animal {
     private int idade;
     private double peso;
     private boolean castrado;
-    private RandomAccessFile foto;
     private boolean adotado;
     private String especie;
-
+    // tratar foto depois
     // Construtores
-    public Animal(int cod, String nome, char sexo, String raca, int idade, double peso, boolean castrado, RandomAccessFile foto, boolean adotado, String especie) {
+    public Animal(int cod, String nome, char sexo, String raca, int idade, double peso, boolean castrado,  boolean adotado, String especie) {
         this.cod = cod;
         this.nome = nome;
         this.sexo = sexo;
@@ -25,12 +31,11 @@ public class Animal {
         this.idade = idade;
         this.peso = peso;
         this.castrado = castrado;
-        this.foto = foto;
         this.adotado = adotado;
         this.especie = especie;
     }
     public Animal(){
-        this(0,"",' ',"",0,0,false,null,false,"");
+        this(0,"",' ',"",0,0,false,false,"");
     }
 
     // Gets e Sets
@@ -88,14 +93,6 @@ public class Animal {
 
     public void setCastrado(boolean castrado) {
         this.castrado = castrado;
-    }
-
-    public RandomAccessFile getFoto() {
-        return foto;
-    }
-
-    public void setFoto(RandomAccessFile foto) {
-        this.foto = foto;
     }
 
     public boolean isAdotado() {

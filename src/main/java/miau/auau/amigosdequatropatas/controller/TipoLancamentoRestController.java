@@ -1,7 +1,8 @@
 package miau.auau.amigosdequatropatas.controller;
 
-import miau.auau.amigosdequatropatas.model.Erro;
+import miau.auau.amigosdequatropatas.util.Erro;
 import miau.auau.amigosdequatropatas.model.TipoLancamento;
+import miau.auau.amigosdequatropatas.repository.TipoLancamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +12,10 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("apis/tipo_lanc")
-public class TipoLancRestCtrl {
+public class TipoLancamentoRestController {
     // DECLARAÇÕES
     @Autowired
-    private TipoLancamento tpLancamento;
+    private TipoLancamentoRepository tipoLancamentoRepository;
 
     // MÉTODOS ---------------------------------------------
     // BUSCAR
@@ -27,7 +28,7 @@ public class TipoLancRestCtrl {
         }
         return ResponseEntity.badRequest().body(new Erro("Nenhum Tipo de Lançamento cadastrado!"));
     }
-    @GetMapping("buscar")
+    @GetMapping("buscar-nome")
     public ResponseEntity<Object> getTpLanc(String tipoLanc) {
         TipoLancamento tipoLancamento = new TipoLancamento();
         // busca o Tipo de Lançamento que corresponde com tipoLanc e retorna para 'tipoLancamento'
@@ -41,7 +42,7 @@ public class TipoLancRestCtrl {
     @PostMapping("gravar")
     public ResponseEntity<Object> gravarTpLanc(@RequestBody TipoLancamento tpLanc) {
         // grava no banco de dados o respectivo objeto 'tpLanc'
-        return ResponseEntity.ok(tpLanc); // depois da gravação bem sucedida
+        return ResponseEntity.ok(tipoLancamentoRepository.save(tpLanc)); // depois da gravação bem sucedida
     }
 
     // DELETE
