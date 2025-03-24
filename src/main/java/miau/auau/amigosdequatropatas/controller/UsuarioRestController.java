@@ -1,6 +1,5 @@
 package miau.auau.amigosdequatropatas.controller;
 
-import miau.auau.amigosdequatropatas.model.TipoMedicamento;
 import miau.auau.amigosdequatropatas.repository.UsuarioRepository;
 import miau.auau.amigosdequatropatas.util.Erro;
 import miau.auau.amigosdequatropatas.model.Usuario;

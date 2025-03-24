@@ -1,11 +1,8 @@
 package miau.auau.amigosdequatropatas.model;
 
 import jakarta.persistence.*;
-
-import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Entity
 @Table(name = "Animal")

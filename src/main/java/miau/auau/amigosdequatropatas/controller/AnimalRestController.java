@@ -1,7 +1,6 @@
 package miau.auau.amigosdequatropatas.controller;
 
 import miau.auau.amigosdequatropatas.model.Animal;
-import miau.auau.amigosdequatropatas.model.TipoMedicamento;
 import miau.auau.amigosdequatropatas.util.Erro;
 import miau.auau.amigosdequatropatas.repository.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ public class AnimalRestController {
     // DECLARAÇÕES
     @Autowired
     private AnimalRepository animalRepository;
-
 
     // MÉTODOS ---------------------------------------------
     // BUSCAR
