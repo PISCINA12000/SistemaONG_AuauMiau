@@ -7,12 +7,13 @@ import jakarta.persistence.*;
 public class TipoLancamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cod;
+    private int codTipoLancamento;
+
     private String descricao;
 
     // Construtores
     public TipoLancamento(int cod, String descricao) {
-        this.cod = cod;
+        this.codTipoLancamento = cod;
         this.descricao = descricao;
     }
     public TipoLancamento() {
@@ -21,11 +22,11 @@ public class TipoLancamento {
 
     // Gets e Sets
     public int getCod() {
-        return cod;
+        return codTipoLancamento;
     }
 
     public void setCod(int cod) {
-        this.cod = cod;
+        this.codTipoLancamento = cod;
     }
 
     public String getDescricao() {

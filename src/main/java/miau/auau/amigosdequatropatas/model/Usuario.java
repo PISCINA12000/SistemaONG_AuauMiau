@@ -1,24 +1,40 @@
 package miau.auau.amigosdequatropatas.model;
 
 import jakarta.persistence.*;
-import miau.auau.amigosdequatropatas.modelReserva.Endereco;
 
 @Entity
 @Table(name = "Usuario")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cod;
+
+    private int codUsuario;
+
     private String nome;
+
     private String email;
+
     private String senha;
+
     private String telefone;
+
     private String cpf;
+
     private String privilegio;
+
     private char sexo;
+
+    private String cep;
+
+    private String rua;
+
+    private String bairro;
+
+    private String numero;
+
     // Construtores
-    public Usuario(int cod, String nome, String email, String senha, String telefone, String cpf, String privilegio, char sexo) {
-        this.cod = cod;
+    public Usuario(int cod, String nome, String email, String senha, String telefone, String cpf, String privilegio, char sexo, String cep, String rua, String bairro, String numero) {
+        this.codUsuario = cod;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -26,18 +42,23 @@ public class Usuario {
         this.cpf = cpf;
         this.privilegio = privilegio;
         this.sexo = sexo;
+        this.cep = cep;
+        this.rua = rua;
+        this.bairro = bairro;
+        this.numero = numero;
     }
+
     public Usuario() {
-        this(0, "", "", "", "", "", "", ' ');
+        this(0, "", "", "", "", "", "", ' ', "", "", "", "");
     }
 
     // Gets e Sets
-    public int getCod() {
-        return cod;
+    public int getCodUsuario() {
+        return codUsuario;
     }
 
     public void setCod(int cod) {
-        this.cod = cod;
+        this.codUsuario = cod;
     }
 
     public String getNome() {
@@ -94,5 +115,37 @@ public class Usuario {
 
     public void setSexo(char sexo) {
         this.sexo = sexo;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 }

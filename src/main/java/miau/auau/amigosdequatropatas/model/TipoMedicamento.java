@@ -7,12 +7,12 @@ import jakarta.persistence.*;
 public class TipoMedicamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cod;
+    private int codTipoMedicamento;
     private String nome;
 
     // Construtores
     public TipoMedicamento(int cod, String nome) {
-        this.cod = cod;
+        this.codTipoMedicamento = cod;
         this.nome = nome;
     }
     public TipoMedicamento() {
@@ -21,11 +21,11 @@ public class TipoMedicamento {
 
     // Gets e Sets
     public int getCod() {
-        return cod;
+        return codTipoMedicamento;
     }
 
     public void setCod(int cod) {
-        this.cod = cod;
+        this.codTipoMedicamento = cod;
     }
 
     public String getNome() {

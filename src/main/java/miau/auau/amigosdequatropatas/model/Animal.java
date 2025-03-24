@@ -9,19 +9,28 @@ import java.util.List;
 public class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int cod;
+    private int codAnimal;
+
     private String nome;
+
     private char sexo;
+
     private String raca;
+
     private int idade;
+
     private double peso;
+
     private boolean castrado;
+
     private boolean adotado;
+
+    private String fileName;
 
     // tratar foto depois
     // Construtores
-    public Animal(int cod, String nome, char sexo, String raca, int idade, double peso, boolean castrado,  boolean adotado) {
-        this.cod = cod;
+    public Animal(int cod, String nome, char sexo, String raca, int idade, double peso, boolean castrado,  boolean adotado, String fileName) {
+        this.codAnimal = cod;
         this.nome = nome;
         this.sexo = sexo;
         this.raca = raca;
@@ -29,19 +38,20 @@ public class Animal {
         this.peso = peso;
         this.castrado = castrado;
         this.adotado = adotado;
+        this.fileName = fileName;
 
     }
     public Animal(){
-        this(0,"",' ',"",0,0,false,false);
+        this(0,"",' ',"",0,0,false,false, "");
     }
 
     // Gets e Sets
     public int getCod() {
-        return cod;
+        return codAnimal;
     }
 
     public void setCod(int cod) {
-        this.cod = cod;
+        this.codAnimal = cod;
     }
 
     public String getNome() {
@@ -98,6 +108,14 @@ public class Animal {
 
     public void setAdotado(boolean adotado) {
         this.adotado = adotado;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     // Métodos
