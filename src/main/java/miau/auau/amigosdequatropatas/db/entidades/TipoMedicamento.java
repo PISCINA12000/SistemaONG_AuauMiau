@@ -1,12 +1,7 @@
 package miau.auau.amigosdequatropatas.db.entidades;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "TipoMedicamento")
 public class TipoMedicamento {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int codTipoMedicamento;
     private String nome;
 

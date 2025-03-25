@@ -1,9 +1,7 @@
 package miau.auau.amigosdequatropatas.view;
 
-import miau.auau.amigosdequatropatas.repository.TipoMedicamentosRepository;
 import miau.auau.amigosdequatropatas.util.Erro;
 import miau.auau.amigosdequatropatas.db.entidades.TipoMedicamento;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,16 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RestController
 @RequestMapping("apis/tipo_medic")
 
-public class TipoMedicamentosRestController {
+public class TipoMedicamentosRestView {
 
-    @Autowired
-    private TipoMedicamentosRepository tipoMedicamentosRepository;
+
     // MÉTODOS ---------------------------------------------
 
     @GetMapping("buscar")
     public ResponseEntity<Object> getTpMedic() {
         List<TipoMedicamento> lista = new ArrayList<>();
-        lista.addAll(tipoMedicamentosRepository.findAll());
+       // lista.addAll(tipoMedicamentosRepository.findAll());
         if(lista.size() > 0){
             return ResponseEntity.ok(lista);
         }
@@ -35,7 +32,7 @@ public class TipoMedicamentosRestController {
     @GetMapping("buscar-nome/{nome}")
     public ResponseEntity<Object> getTpMeidic(@PathVariable (value = "nome") String tipoMedic) {
         List<TipoMedicamento> lista = new ArrayList<>();
-        lista.addAll(tipoMedicamentosRepository.findAll());
+       // lista.addAll(tipoMedicamentosRepository.findAll());
         if(lista.size() > 0)
         {
             int i = 0;
@@ -57,7 +54,8 @@ public class TipoMedicamentosRestController {
     @PostMapping("gravar")
     public ResponseEntity<Object> gravarTpMedic(@RequestBody TipoMedicamento tpMedic) {
 
-        return ResponseEntity.ok(tipoMedicamentosRepository.save(tpMedic)); // depois da gravação bem sucedida
+        return null;
+        // return ResponseEntity.ok(tipoMedicamentosRepository.save(tpMedic)); // depois da gravação bem sucedida
     }
 
     // DELETE

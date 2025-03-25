@@ -2,8 +2,6 @@ package miau.auau.amigosdequatropatas.view;
 
 import miau.auau.amigosdequatropatas.util.Erro;
 import miau.auau.amigosdequatropatas.db.entidades.TipoLancamento;
-import miau.auau.amigosdequatropatas.repository.TipoLancamentoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
@@ -12,17 +10,16 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("apis/tipo_lanc")
-public class TipoLancamentoRestController {
+public class TipoLancamentoRestView {
     // DECLARAÇÕES
-    @Autowired
-    private TipoLancamentoRepository tipoLancamentoRepository;
+
 
     // MÉTODOS ---------------------------------------------
     // BUSCAR
     @GetMapping("buscar")
     public ResponseEntity<Object> getTpLanc() {
         List<TipoLancamento> lista = new ArrayList<>();
-        lista.addAll(tipoLancamentoRepository.findAll());
+        //lista.addAll(tipoLancamentoRepository.findAll());
         // busca todos os tipos de lancamento e atribui para 'lista'
         if(lista.size() > 0)
         {
@@ -34,7 +31,7 @@ public class TipoLancamentoRestController {
     @GetMapping("buscar-nome/{nome}")
     public ResponseEntity<Object> getTpLanc(@PathVariable (value = "nome") String tipoLanc) {
         List<TipoLancamento> lista = new ArrayList<>();
-        lista.addAll(tipoLancamentoRepository.findAll());
+        //lista.addAll(tipoLancamentoRepository.findAll());
         if(lista.size() > 0)
         {
             int i = 0;
@@ -56,7 +53,8 @@ public class TipoLancamentoRestController {
     @PostMapping("gravar")
     public ResponseEntity<Object> gravarTpLanc(@RequestBody TipoLancamento tpLanc) {
         // grava no banco de dados o respectivo objeto 'tpLanc'
-        return ResponseEntity.ok(tipoLancamentoRepository.save(tpLanc)); // depois da gravação bem sucedida
+       // return ResponseEntity.ok(tipoLancamentoRepository.save(tpLanc)); // depois da gravação bem sucedida
+        return null;
     }
 
     // DELETE

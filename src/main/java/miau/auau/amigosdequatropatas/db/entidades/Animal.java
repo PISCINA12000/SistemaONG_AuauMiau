@@ -1,19 +1,22 @@
 package miau.auau.amigosdequatropatas.db.entidades;
+import miau.auau.amigosdequatropatas.db.dals.AnimalDAL;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import jakarta.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "Animal")
+
+@Component
 public class Animal {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
+    @Autowired
+    private AnimalDAL animalDAL;
+
     private int codAnimal;
 
     private String nome;
 
-    private char sexo;
+    private String  sexo;
 
     private String raca;
 
@@ -21,16 +24,16 @@ public class Animal {
 
     private double peso;
 
-    private boolean castrado;
+    private String castrado;
 
-    private boolean adotado;
+    private String adotado;
 
     private String fileName;
 
     // tratar foto depois
     // Construtores
-    public Animal(int cod, String nome, char sexo, String raca, int idade, double peso, boolean castrado,  boolean adotado, String fileName) {
-        this.codAnimal = cod;
+    public Animal(int codAnimal, String nome, String sexo, String raca, int idade, double peso, String castrado,  String adotado, String fileName) {
+        this.codAnimal = codAnimal;
         this.nome = nome;
         this.sexo = sexo;
         this.raca = raca;
@@ -42,16 +45,16 @@ public class Animal {
 
     }
     public Animal(){
-        this(0,"",' ',"",0,0,false,false, "");
+        this(0,"","","",0,0,"","", "");
     }
 
     // Gets e Sets
-    public int getCod() {
+    public int getCodAnimal() {
         return codAnimal;
     }
 
-    public void setCod(int cod) {
-        this.codAnimal = cod;
+    public void setCodAnimal(int codAnimal) {
+        this.codAnimal = codAnimal;
     }
 
     public String getNome() {
@@ -62,11 +65,11 @@ public class Animal {
         this.nome = nome;
     }
 
-    public char getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(char sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
@@ -94,19 +97,19 @@ public class Animal {
         this.peso = peso;
     }
 
-    public boolean isCastrado() {
+    public String getCastrado() {
         return castrado;
     }
 
-    public void setCastrado(boolean castrado) {
+    public void setCastrado(String castrado) {
         this.castrado = castrado;
     }
 
-    public boolean isAdotado() {
+    public String getAdotado() {
         return adotado;
     }
 
-    public void setAdotado(boolean adotado) {
+    public void setAdotado(String adotado) {
         this.adotado = adotado;
     }
 
@@ -118,11 +121,37 @@ public class Animal {
         this.fileName = fileName;
     }
 
-    // Métodos
-    public List<Animal> getAnimal() {
-        List<Animal> lista = new ArrayList<>();
-        // retorna todos os animais chamando o banco de dados
-        //lista = objetoBanco.getAnimal;
-        return lista;
+   // metodos
+
+    public boolean incluir(Animal animal)
+    {
+        return animalDAL.gravar(animal); // grava no banco
     }
+    public boolean excluir(Animal animal)
+    {
+        return animalDAL.apagar(animal);
+    }
+    public Animal consultarID(int id)
+    {
+        return animalDAL.get(id);
+    }
+    public List<Animal> consultar(String filtro)
+    {
+        return animalDAL.get(filtro);
+    }
+    public boolean alterar(Animal animal)
+    {
+        System.out.println(animal.getCodAnimal());
+        System.out.println(animal.getNome());
+        System.out.println(animal.getSexo());
+        System.out.println(animal.getRaca());
+        System.out.println(animal.getIdade());
+        System.out.println(animal.getPeso());
+        System.out.println(animal.getCastrado());
+        System.out.println(animal.getAdotado());
+        System.out.println(animal.getFileName());
+
+        return animalDAL.alterar(animal);
+    }
+
 }

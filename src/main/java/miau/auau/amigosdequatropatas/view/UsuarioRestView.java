@@ -1,9 +1,7 @@
 package miau.auau.amigosdequatropatas.view;
 
-import miau.auau.amigosdequatropatas.repository.UsuarioRepository;
 import miau.auau.amigosdequatropatas.util.Erro;
 import miau.auau.amigosdequatropatas.db.entidades.Usuario;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
@@ -12,15 +10,14 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("apis/usuario")
-public class UsuarioRestController
+public class UsuarioRestView
 {
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+
 
     @GetMapping("buscar")
     public ResponseEntity<Object> getUsuarios() {
         List<Usuario>lista = new ArrayList<>();
-        lista.addAll(usuarioRepository.findAll());
+        //lista.addAll(usuarioRepository.findAll());
         if(lista.size() > 0){
             return ResponseEntity.ok(lista); // vetor de strings
         }
@@ -30,7 +27,7 @@ public class UsuarioRestController
     @GetMapping("buscar-cpf/{cpf}")
     public ResponseEntity<Object> getUsuarios(@PathVariable (value = "cpf") String cpf) {
         List<Usuario> lista = new ArrayList<>();
-        lista.addAll(usuarioRepository.findAll());
+        //lista.addAll(usuarioRepository.findAll());
         if(lista.size() > 0)
         {
             int i = 0;
@@ -50,7 +47,8 @@ public class UsuarioRestController
 
     @PostMapping("gravar")
     public ResponseEntity<Object> gravarUsuario(@RequestBody Usuario usuario) {
-        return ResponseEntity.ok(usuarioRepository.save(usuario));
+        return null;
+        //return ResponseEntity.ok(usuarioRepository.save(usuario));
     }
 
     // DELETE
