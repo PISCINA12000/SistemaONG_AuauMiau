@@ -1,8 +1,7 @@
-package miau.auau.amigosdequatropatas.controller;
+package miau.auau.amigosdequatropatas.view;
 
-import miau.auau.amigosdequatropatas.model.TipoMedicamento;
 import miau.auau.amigosdequatropatas.util.Erro;
-import miau.auau.amigosdequatropatas.model.TipoLancamento;
+import miau.auau.amigosdequatropatas.db.entidades.TipoLancamento;
 import miau.auau.amigosdequatropatas.repository.TipoLancamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,12 +1,6 @@
-package miau.auau.amigosdequatropatas.model;
+package miau.auau.amigosdequatropatas.db.entidades;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "Usuario")
 public class Usuario {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private int codUsuario;
 

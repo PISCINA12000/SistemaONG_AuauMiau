@@ -1,12 +1,11 @@
-package miau.auau.amigosdequatropatas.controller;
+package miau.auau.amigosdequatropatas.view;
 
-import miau.auau.amigosdequatropatas.model.Animal;
+import miau.auau.amigosdequatropatas.db.entidades.Animal;
 import miau.auau.amigosdequatropatas.util.Erro;
 import miau.auau.amigosdequatropatas.repository.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;

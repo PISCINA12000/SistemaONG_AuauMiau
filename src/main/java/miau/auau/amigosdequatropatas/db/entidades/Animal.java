@@ -1,4 +1,4 @@
-package miau.auau.amigosdequatropatas.model;
+package miau.auau.amigosdequatropatas.db.entidades;
 
 import jakarta.persistence.*;
 import java.util.ArrayList;
