@@ -1,74 +1,62 @@
 package miau.auau.amigosdequatropatas.view;
 
+import miau.auau.amigosdequatropatas.control.TipoLancamentoController;
+import miau.auau.amigosdequatropatas.entidades.TipoLancamento;
 import miau.auau.amigosdequatropatas.util.Erro;
-import miau.auau.amigosdequatropatas.db.entidades.TipoLancamento;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("apis/tipo_lanc")
+@RequestMapping("apis/tipo-lancamento")
 public class TipoLancamentoRestView {
     // DECLARAÇÕES
-
+    @Autowired
+    private TipoLancamentoController tipoLancamentoController;
 
     // MÉTODOS ---------------------------------------------
     // BUSCAR
-    @GetMapping("buscar")
-    public ResponseEntity<Object> getTpLanc() {
-        List<TipoLancamento> lista = new ArrayList<>();
-        //lista.addAll(tipoLancamentoRepository.findAll());
-        // busca todos os tipos de lancamento e atribui para 'lista'
-        if(lista.size() > 0)
-        {
-            return ResponseEntity.ok(lista); // vetor de string
-        }
+    @GetMapping("buscar/{filtro}") // vazio, retorna todos
+    public ResponseEntity<Object> getTiposLancamento(@PathVariable(value = "filtro") String filtro) {
+        if (!tipoLancamentoController.onBuscar(filtro).isEmpty())
+            return ResponseEntity.ok().body(tipoLancamentoController.onBuscar(filtro));
         else
-            return ResponseEntity.badRequest().body(new Erro("Nenhum Tipo de Lançamento cadastrado!"));
+            return ResponseEntity.badRequest().body(new Erro("Tipo de lançamento não encontrado ou nenhum cadastrado"));
     }
-    @GetMapping("buscar-nome/{nome}")
-    public ResponseEntity<Object> getTpLanc(@PathVariable (value = "nome") String tipoLanc) {
-        List<TipoLancamento> lista = new ArrayList<>();
-        //lista.addAll(tipoLancamentoRepository.findAll());
-        if(lista.size() > 0)
-        {
-            int i = 0;
-            while(i < lista.size() && !lista.get(i).getDescricao().toLowerCase().equals(tipoLanc)) //
-                i++;
-            if (i < lista.size()) // não terminou
-            {
-                List<TipoLancamento> lista2 = new ArrayList<>();
-                lista2.add(lista.get(i));
-                return ResponseEntity.ok(lista2);
-            }
-            return ResponseEntity.badRequest().body(new Erro("Esse Tipo de Lançamento não foi encontrado!"));
-        }
-        else
-            return ResponseEntity.badRequest().body(new Erro("Nenhum Tipo de Lançamento cadastrado!"));
+
+    @GetMapping("buscar-id/{id}")
+    public ResponseEntity<Object> getTipoLancamento(@PathVariable(value = "id") int id) {
+        if (tipoLancamentoController.onBuscarId(id) != null) {
+            return ResponseEntity.ok(tipoLancamentoController.onBuscarId(id));
+        } else
+            return ResponseEntity.badRequest().body(new Erro("Tipo de lançamento não encontrado!"));
     }
 
     // GRAVAR
     @PostMapping("gravar")
-    public ResponseEntity<Object> gravarTpLanc(@RequestBody TipoLancamento tpLanc) {
-        // grava no banco de dados o respectivo objeto 'tpLanc'
-       // return ResponseEntity.ok(tipoLancamentoRepository.save(tpLanc)); // depois da gravação bem sucedida
-        return null;
+    public ResponseEntity<Object> gravarTipoLancamento(@RequestBody TipoLancamento tipoLancamento) {
+        if (tipoLancamentoController.onGravar(tipoLancamento))
+            return ResponseEntity.ok(tipoLancamento);
+        else
+            return ResponseEntity.badRequest().body(new Erro("Erro ao gravar tipo de lançamento"));
     }
 
     // DELETE
-    @DeleteMapping("excluir")
-    public ResponseEntity<Object> excluirTpLanc(int id) {
-        String tpLanc = "";
-        // deleta do banco de dados o Tipo com o 'cod' == 'id' e atribui seu nome para 'tpLanc'
-        return ResponseEntity.ok("O Tipo de Lançamento " + tpLanc + " foi excluído com sucesso!");
+    @DeleteMapping("excluir/{id}")
+    public ResponseEntity<Object> excluirTipoLancamento(@PathVariable(value = "id") int id) {
+        if (tipoLancamentoController.onDelete(id)) {
+            return ResponseEntity.ok(new Erro("Tipo de lançamento excluído com sucesso!"));
+        } else
+            return ResponseEntity.badRequest().body(new Erro("Erro ao excluir tipo de lançamento"));
     }
 
     // ATUALIZAR
     @PutMapping("atualizar")
-    public ResponseEntity<Object> atualizarAnimal(@RequestBody TipoLancamento tpLanc) {
-        // atualizar no banco de dados o Tipo Lançamento com o mesmo id do objeto 'tpLanc'
-        return ResponseEntity.ok("O Tipo de Lançamento foi atualizado com sucesso!");
+    public ResponseEntity<Object> atualizarTipoLancamento(@RequestBody TipoLancamento tipoLancamento) {
+        if (tipoLancamentoController.onAlterar(tipoLancamento)) {
+            return ResponseEntity.ok(tipoLancamento);
+        } else
+            return ResponseEntity.badRequest().body(new Erro("Erro ao atualizar tipo de lançamento"));
     }
 }

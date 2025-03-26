@@ -1,10 +1,7 @@
 package miau.auau.amigosdequatropatas.control;
 
-import miau.auau.amigosdequatropatas.db.dals.AnimalDAL;
-import miau.auau.amigosdequatropatas.db.entidades.Animal;
-import miau.auau.amigosdequatropatas.util.Erro;
+import miau.auau.amigosdequatropatas.entidades.Animal;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

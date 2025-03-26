@@ -1,7 +1,7 @@
 package miau.auau.amigosdequatropatas.view;
 
 import miau.auau.amigosdequatropatas.util.Erro;
-import miau.auau.amigosdequatropatas.db.entidades.Usuario;
+import miau.auau.amigosdequatropatas.entidades.Usuario;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;

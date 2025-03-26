@@ -1,4 +1,4 @@
-package miau.auau.amigosdequatropatas.db.entidades;
+package miau.auau.amigosdequatropatas.entidades;
 import miau.auau.amigosdequatropatas.db.dals.AnimalDAL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -141,16 +141,6 @@ public class Animal {
     }
     public boolean alterar(Animal animal)
     {
-        System.out.println(animal.getCodAnimal());
-        System.out.println(animal.getNome());
-        System.out.println(animal.getSexo());
-        System.out.println(animal.getRaca());
-        System.out.println(animal.getIdade());
-        System.out.println(animal.getPeso());
-        System.out.println(animal.getCastrado());
-        System.out.println(animal.getAdotado());
-        System.out.println(animal.getFileName());
-
         return animalDAL.alterar(animal);
     }
 

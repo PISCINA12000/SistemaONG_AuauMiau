@@ -1,6 +1,6 @@
 package miau.auau.amigosdequatropatas.db.dals;
 
-import miau.auau.amigosdequatropatas.db.entidades.Animal;
+import miau.auau.amigosdequatropatas.entidades.Animal;
 import miau.auau.amigosdequatropatas.util.IDAL;
 import miau.auau.amigosdequatropatas.util.SingletonDB;
 import org.springframework.stereotype.Component;

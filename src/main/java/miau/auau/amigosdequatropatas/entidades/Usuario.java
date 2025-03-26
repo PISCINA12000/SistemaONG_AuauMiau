@@ -1,4 +1,4 @@
-package miau.auau.amigosdequatropatas.db.entidades;
+package miau.auau.amigosdequatropatas.entidades;
 
 public class Usuario {
 

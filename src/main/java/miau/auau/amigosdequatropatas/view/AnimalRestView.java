@@ -1,10 +1,9 @@
 package miau.auau.amigosdequatropatas.view;
 
 import miau.auau.amigosdequatropatas.control.AnimalController;
-import miau.auau.amigosdequatropatas.db.entidades.Animal;
+import miau.auau.amigosdequatropatas.entidades.Animal;
 import miau.auau.amigosdequatropatas.util.Erro;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
