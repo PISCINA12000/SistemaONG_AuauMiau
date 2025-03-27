@@ -1,7 +1,10 @@
 package miau.auau.amigosdequatropatas.view;
 
+import miau.auau.amigosdequatropatas.control.UsuarioController;
+import miau.auau.amigosdequatropatas.entidades.Animal;
 import miau.auau.amigosdequatropatas.util.Erro;
 import miau.auau.amigosdequatropatas.entidades.Usuario;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
@@ -12,54 +15,63 @@ import java.util.List;
 @RequestMapping("apis/usuario")
 public class UsuarioRestView
 {
+    @Autowired
+    private UsuarioController usuarioController;
 
-
-    @GetMapping("buscar")
-    public ResponseEntity<Object> getUsuarios() {
-        List<Usuario>lista = new ArrayList<>();
-        //lista.addAll(usuarioRepository.findAll());
-        if(lista.size() > 0){
-            return ResponseEntity.ok(lista); // vetor de strings
-        }
+    @GetMapping("buscar/{filtro}") // vazio, retorna todos
+    public ResponseEntity<Object> getUsuarios(@PathVariable(value = "filtro") String filtro)
+    {
+        if(!usuarioController.onBuscar(filtro).isEmpty())
+            return ResponseEntity.ok().body(usuarioController.onBuscar(filtro));
         else
-            return ResponseEntity.badRequest().body(new Erro("Não há nenhum Usuario cadastrado!"));
+            return ResponseEntity.badRequest().body(new Erro("Usuario nao encontrado ou nenhum Usuario cadastrado"));
     }
-    @GetMapping("buscar-cpf/{cpf}")
-    public ResponseEntity<Object> getUsuarios(@PathVariable (value = "cpf") String cpf) {
-        List<Usuario> lista = new ArrayList<>();
-        //lista.addAll(usuarioRepository.findAll());
-        if(lista.size() > 0)
+
+    @GetMapping("buscar-id/{id}")
+    public ResponseEntity<Object> getUsuarios(@PathVariable(value = "id") int id)
+    {
+
+        if(usuarioController.onBuscarId(id) != null)
         {
-            int i = 0;
-            while(i < lista.size() && !lista.get(i).getCpf().equals(cpf)) //
-                i++;
-            if (i < lista.size()) // não terminou
-            {
-                List<Usuario> lista2 = new ArrayList<>();
-                lista2.add(lista.get(i));
-                return ResponseEntity.ok(lista2);
-            }
-            return ResponseEntity.badRequest().body(new Erro("Usuário não foi encontrado!"));
+            return ResponseEntity.ok(usuarioController.onBuscarId(id));
         }
         else
-            return ResponseEntity.badRequest().body(new Erro("Nenhum usuário cadastrado!"));
+            return ResponseEntity.badRequest().body(new Erro("Usuario não encontrado!"));
+
     }
 
     @PostMapping("gravar")
-    public ResponseEntity<Object> gravarUsuario(@RequestBody Usuario usuario) {
-        return null;
-        //return ResponseEntity.ok(usuarioRepository.save(usuario));
+    public ResponseEntity<Object> gravarUsuario(@RequestBody Usuario usuario)
+    {
+
+        if (usuarioController.onGravar(usuario))
+            return ResponseEntity.ok(usuario);
+        else
+            return ResponseEntity.badRequest().body(new Erro("Erro ao gravar usuario"));
+
     }
 
     // DELETE
-    @DeleteMapping("excluir")
-    public ResponseEntity<Object> excluirUsuario(int id) {
-        String nomeUsuario = "";
-        return ResponseEntity.ok("O usuario " + nomeUsuario + " foi excluído com sucesso!");
+    @DeleteMapping("excluir/{id}") //
+    public ResponseEntity<Object> excluirUsuario(@PathVariable (value = "id") int id) {
+
+        if(usuarioController.onDelete(id))
+        {
+            return ResponseEntity.ok(new Erro("Usuario excluido com sucesso!"));
+        }
+        else
+            return ResponseEntity.badRequest().body(new Erro("Erro ao excluir usuario"));
+
     }
 
     @PutMapping("atualizar")
-    public ResponseEntity<Object> atualizarUsuario(@RequestBody Usuario usuario) {
-        return ResponseEntity.ok("O usuario foi atualizado com sucesso!");
+    public ResponseEntity<Object> atualizarUsuario(@RequestBody Usuario usuario)
+    {
+        if(usuarioController.onAlterar(usuario))
+        {
+            return ResponseEntity.ok(usuario);
+        }
+        else
+            return ResponseEntity.badRequest().body(new Erro("Erro ao atualizar usuario!"));
     }
 }

@@ -1,6 +1,16 @@
 package miau.auau.amigosdequatropatas.entidades;
 
+import miau.auau.amigosdequatropatas.db.dals.UsuarioDAL;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Component
 public class Usuario {
+
+    @Autowired
+    private UsuarioDAL usuarioDAL;
 
     private int codUsuario;
 
@@ -16,7 +26,7 @@ public class Usuario {
 
     private String privilegio;
 
-    private char sexo;
+    private String sexo;
 
     private String cep;
 
@@ -27,7 +37,7 @@ public class Usuario {
     private String numero;
 
     // Construtores
-    public Usuario(int cod, String nome, String email, String senha, String telefone, String cpf, String privilegio, char sexo, String cep, String rua, String bairro, String numero) {
+    public Usuario(int cod, String nome, String email, String senha, String telefone, String cpf, String privilegio, String sexo, String cep, String rua, String bairro, String numero) {
         this.codUsuario = cod;
         this.nome = nome;
         this.email = email;
@@ -43,7 +53,7 @@ public class Usuario {
     }
 
     public Usuario() {
-        this(0, "", "", "", "", "", "", ' ', "", "", "", "");
+        this(0, "", "", "", "", "", "", "", "", "", "", "");
     }
 
     // Gets e Sets
@@ -103,11 +113,11 @@ public class Usuario {
         this.privilegio = privilegio;
     }
 
-    public char getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(char sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
@@ -141,5 +151,26 @@ public class Usuario {
 
     public void setNumero(String numero) {
         this.numero = numero;
+    }
+
+    public boolean incluir(Usuario usuario)
+    {
+        return usuarioDAL.gravar(usuario); // grava no banco
+    }
+    public boolean excluir(Usuario usuario)
+    {
+        return usuarioDAL.apagar(usuario);
+    }
+    public Usuario consultarID(int id)
+    {
+        return usuarioDAL.get(id);
+    }
+    public List<Usuario> consultar(String filtro)
+    {
+        return usuarioDAL.get(filtro);
+    }
+    public boolean alterar(Usuario usuario)
+    {
+        return usuarioDAL.alterar(usuario);
     }
 }
