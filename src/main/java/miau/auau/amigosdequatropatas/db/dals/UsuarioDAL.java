@@ -3,11 +3,13 @@ package miau.auau.amigosdequatropatas.db.dals;
 import miau.auau.amigosdequatropatas.entidades.Usuario;
 import miau.auau.amigosdequatropatas.util.IDAL;
 import miau.auau.amigosdequatropatas.util.SingletonDB;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class UsuarioDAL implements IDAL<Usuario>
 {
     @Override
