@@ -11,29 +11,17 @@ public class Usuario {
 
     @Autowired
     private UsuarioDAL usuarioDAL;
-
     private int codUsuario;
-
     private String nome;
-
     private String email;
-
     private String senha;
-
     private String telefone;
-
     private String cpf;
-
     private String privilegio;
-
     private String sexo;
-
     private String cep;
-
     private String rua;
-
     private String bairro;
-
     private String numero;
 
     // Construtores

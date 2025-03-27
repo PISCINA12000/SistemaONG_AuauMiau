@@ -1,5 +1,6 @@
 package miau.auau.amigosdequatropatas.db.dals;
 
+import miau.auau.amigosdequatropatas.entidades.TipoLancamento;
 import miau.auau.amigosdequatropatas.entidades.Usuario;
 import miau.auau.amigosdequatropatas.util.IDAL;
 import miau.auau.amigosdequatropatas.util.SingletonDB;
@@ -10,25 +11,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class UsuarioDAL implements IDAL<Usuario>
-{
+public class UsuarioDAL implements IDAL<Usuario> {
+
     @Override
     public boolean gravar(Usuario entidade) {
         String sql = """
-                INSERT INTO usuario (usu_nome, usu_email, usu_senha, usu_telefone, usu_cpf, usu_privilegio, usu_sexo, usu_cep, usu_rua, usu_bairro, usu_numero)
+                INSERT INTO usuario (usu_nome, usu_email, usu_senha, usu_telefone, usu_cpf, usu_privilegio, 
+                usu_sexo, usu_cep, usu_rua, usu_bairro, usu_numero)
                 VALUES ('#1', '#2', '#3', '#4', '#5', '#6', '#7', '#8', '#9', '#10', '#11')
                 """;
         sql = sql.replace("#1", entidade.getNome())
-                .replace("#2", entidade.getEmail())  // Correção para char
-                .replace("#3", entidade.getSenha())
-                .replace("#4", entidade.getTelefone())
-                .replace("#5", entidade.getCpf())
-                .replace("#6", entidade.getPrivilegio())
-                .replace("#7", entidade.getSexo())
-                .replace("#8", entidade.getCep())
-                .replace("#9", entidade.getRua())
-                .replace("#10", entidade.getBairro())
-                .replace("#11", entidade.getNumero());
+        .replace("#2", entidade.getEmail())
+        .replace("#3", entidade.getSenha())
+        .replace("#4", entidade.getTelefone())
+        .replace("#5", entidade.getCpf())
+        .replace("#6", entidade.getPrivilegio())
+        .replace("#7", entidade.getSexo())
+        .replace("#8", entidade.getCep())
+        .replace("#9", entidade.getRua())
+        .replace("#10", entidade.getBairro())
+        .replace("#11", entidade.getNumero());
         return SingletonDB.getConexao().manipular(sql);
     }
 
@@ -39,10 +41,10 @@ public class UsuarioDAL implements IDAL<Usuario>
                 SET usu_nome = '#1', usu_email = '#2', usu_senha = '#3', usu_telefone = '#4', usu_cpf = '#5', 
                 usu_privilegio = '#6', usu_sexo = '#7', usu_cep = '#8', usu_rua = '#9', usu_bairro = '#10', 
                 usu_numero = '#11'
-                WHERE usu_cod = #12
+                WHERE usu_id = #12
                 """;
         sql = sql.replace("#1", entidade.getNome())
-                .replace("#2", entidade.getEmail())  // Correção para char
+                .replace("#2", entidade.getEmail())
                 .replace("#3", entidade.getSenha())
                 .replace("#4", entidade.getTelefone())
                 .replace("#5", entidade.getCpf())
@@ -52,7 +54,7 @@ public class UsuarioDAL implements IDAL<Usuario>
                 .replace("#9", entidade.getRua())
                 .replace("#10", entidade.getBairro())
                 .replace("#11", entidade.getNumero())
-                .replace("#12", ""+ entidade.getCodUsuario());
+                .replace("#12", "" + entidade.getCodUsuario());
         return SingletonDB.getConexao().manipular(sql);
     }
 
@@ -72,7 +74,7 @@ public class UsuarioDAL implements IDAL<Usuario>
                 usuario = new Usuario(
                         id,
                         resultSet.getString("usu_nome"),
-                        resultSet.getString("usu_email"), // Pegando o char corretamente
+                        resultSet.getString("usu_email"),
                         resultSet.getString("usu_senha"),
                         resultSet.getString("usu_telefone"),
                         resultSet.getString("usu_cpf"),
@@ -106,7 +108,7 @@ public class UsuarioDAL implements IDAL<Usuario>
                 lista.add(new Usuario(
                         resultSet.getInt("usu_id"),
                         resultSet.getString("usu_nome"),
-                        resultSet.getString("usu_email"), // Pegando o char corretamente
+                        resultSet.getString("usu_email"),
                         resultSet.getString("usu_senha"),
                         resultSet.getString("usu_telefone"),
                         resultSet.getString("usu_cpf"),
@@ -116,7 +118,6 @@ public class UsuarioDAL implements IDAL<Usuario>
                         resultSet.getString("usu_rua"),
                         resultSet.getString("usu_bairro"),
                         resultSet.getString("usu_numero")
-
                 ));
             }
         } catch (Exception e) {

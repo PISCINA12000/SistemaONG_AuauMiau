@@ -44,11 +44,12 @@ public class UsuarioRestView
     public ResponseEntity<Object> gravarUsuario(@RequestBody Usuario usuario)
     {
 
-        if (usuarioController.onGravar(usuario))
+        if (usuarioController.onGravar(usuario)) {
             return ResponseEntity.ok(usuario);
-        else
+        }
+        else {
             return ResponseEntity.badRequest().body(new Erro("Erro ao gravar usuario"));
-
+        }
     }
 
     // DELETE
